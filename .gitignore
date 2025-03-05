@@ -1,0 +1,20 @@
+# Ignorar la carpeta del ambiente virtual
+venv/
+
+# Ignorar archivos de configuración de VS Code (opcional)
+#.vscode/
+
+# Ignorar archivos de caché de Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.db
+*.sqlite3
+
+# Ignorar archivos de entorno (si los tienes)
+.env
+#.venv
+#env/
+#venv/
+
