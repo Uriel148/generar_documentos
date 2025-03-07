@@ -1,11 +1,11 @@
 from docx import Document
 
-def reemplazar_palabra_en_docx():
+def reemplazar_palabra_en_docx(documento_entrada,palabra_buscar,palabra_reemplazo):
     # Solicitar datos al usuario
-    documento_entrada = input("Ingresa la ruta del documento Word (.docx): ")
-    palabra_buscar = input("Ingresa la palabra a buscar (ej. XXXXX): ")
-    palabra_reemplazo = input("Ingresa la palabra de reemplazo: ")
-    documento_salida = input("Ingresa el nombre para el nuevo documento: ")
+    #documento_entrada = input("Ingresa la ruta del documento Word (.docx): ")
+    #palabra_buscar = input("Ingresa la palabra a buscar (ej. XXXXX): ")
+    #palabra_reemplazo = input("Ingresa la palabra de reemplazo: ")
+    #documento_salida = input("Ingresa el nombre para el nuevo documento: ")
 
     # Cargar el documento
     doc = Document(documento_entrada)
@@ -41,8 +41,13 @@ def reemplazar_palabra_en_docx():
                     reemplazar_en_elemento(párrafo)
     
     # Guardar el documento modificado
+    documento_salida = documento_entrada.split(".")[0] + "_" + palabra_reemplazo + ".docx"
     doc.save(documento_salida)
     print(f"\nDocumento modificado guardado como: {documento_salida}")
 
 if __name__ == "__main__":
-    reemplazar_palabra_en_docx()
+    documento_entrada = r"doc\test.docx"
+    palabra_buscar = "XXXXX"
+    palabras_reemplazo = ["exitosa_1","exitosa_2","exitosa_3"]
+    for palabra_reemplazo in palabras_reemplazo: 
+        reemplazar_palabra_en_docx(documento_entrada,palabra_buscar,palabra_reemplazo)
