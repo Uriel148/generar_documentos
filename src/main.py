@@ -1,6 +1,6 @@
 from docx import Document
 
-def reemplazar_palabra_en_docx(documento_entrada,palabras_buscar,palabra_reemplazo):
+def reemplazar_palabra_en_docx(documento_entrada,cambio_palabras,nombre):
     # Cargar el documento
     doc = Document(documento_entrada)
     
@@ -8,7 +8,7 @@ def reemplazar_palabra_en_docx(documento_entrada,palabras_buscar,palabra_reempla
     def reemplazar_en_elemento(elemento):
         if hasattr(elemento, 'runs'):
             for run in elemento.runs:
-                for palabra_buscar in palabras_buscar:
+                for palabra_buscar, palabra_reemplazo in cambio_palabras.items():
                     if palabra_buscar in run.text:
                         run.text = run.text.replace(palabra_buscar, palabra_reemplazo)
     
@@ -36,7 +36,7 @@ def reemplazar_palabra_en_docx(documento_entrada,palabras_buscar,palabra_reempla
                     reemplazar_en_elemento(párrafo)
     
     # Guardar el documento modificado
-    documento_salida = documento_entrada.split(".")[0] + "_" + palabra_reemplazo + ".docx"
+    documento_salida = documento_entrada.split(".")[0] + "_" + nombre + ".docx"
     doc.save(documento_salida)
     print(f"\nDocumento modificado guardado como: {documento_salida}")
 
@@ -44,5 +44,11 @@ if __name__ == "__main__":
     documento_entrada = r"doc\test2.docx"
     palabras_buscar = ["XXXXX","YYYYY","ZZZZZ"] 
     palabras_reemplazo = ["exitosa_1","exitosa_2","exitosa_3"]
-    for palabra_reemplazo in palabras_reemplazo: 
-        reemplazar_palabra_en_docx(documento_entrada,palabras_buscar,palabra_reemplazo)
+    cambios_palabras = [{"XXXXX": "exitosa_1","YYYYY":"exitosa_2","ZZZZZ":"exitosa_3"},
+                        {"XXXXX": "test_1","YYYYY":"test_2","ZZZZZ":"test_3"},
+                        {"XXXXX": "ejemplo_1","YYYYY":"ejemplo_2","ZZZZZ":"ejemplo_3"}] 
+    nombres = ["exitosa","test","ejemplo"] 
+    
+    for cambio_palabras, nombre in zip(cambios_palabras, nombres):
+        reemplazar_palabra_en_docx(documento_entrada,cambio_palabras,nombre)
+    
