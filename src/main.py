@@ -49,6 +49,7 @@ if __name__ == "__main__":
                         {"XXXXX": "ejemplo_1","YYYYY":"ejemplo_2","ZZZZZ":"ejemplo_3"}] 
     nombres = ["exitosa","test","ejemplo"] 
     
+    #Falta probar con tablas y con imagenes
     for cambio_palabras, nombre in zip(cambios_palabras, nombres):
         reemplazar_palabra_en_docx(documento_entrada,cambio_palabras,nombre)
     
